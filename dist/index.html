@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Confronta i costi annui indicativi di auto elettriche, ibride, diesel e benzina in Italia.">
+  <title>Costo Auto Italia</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="Costo Auto Italia — torna all'inizio">
+      <span class="brand-mark" aria-hidden="true">€</span>
+      <span>Costo Auto <b>Italia</b></span>
+    </a>
+    <button id="installBtn" class="install" hidden>Installa app</button>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div>
+        <p class="eyebrow">Confronto rapido · Italia</p>
+        <h1>Quanto costa davvero<br>percorrere i tuoi chilometri?</h1>
+      </div>
+      <p class="lead">Una stima annuale semplice, basata su consumi medi per segmento. Tutti i valori sono modificabili.</p>
+    </section>
+
+    <section class="controls panel" aria-labelledby="setup-title">
+      <div class="section-head">
+        <div><span class="step">01</span><h2 id="setup-title">Il tuo utilizzo</h2></div>
+        <button class="text-btn" id="resetBtn">Ripristina valori</button>
+      </div>
+      <div class="segment-picker" role="radiogroup" aria-label="Categoria del veicolo">
+        <button class="segment active" data-segment="city" role="radio" aria-checked="true"><span>Utilitaria</span><small>Compatta e urbana</small></button>
+        <button class="segment" data-segment="sport" role="radio" aria-checked="false"><span>Sportiva / Coupé</span><small>Prestazioni elevate</small></button>
+        <button class="segment" data-segment="suv" role="radio" aria-checked="false"><span>SUV</span><small>Spazio e versatilità</small></button>
+        <button class="segment" data-segment="van" role="radio" aria-checked="false"><span>Furgone / Multispazio</span><small>Carico e lavoro</small></button>
+      </div>
+      <div class="usage-grid">
+        <label class="range-field">
+          <span><b>Chilometri all'anno</b><output id="kmOutput">15.000 km</output></span>
+          <input id="kmRange" type="range" min="3000" max="60000" step="1000" value="15000">
+          <span class="range-ends"><small>3.000</small><small>60.000</small></span>
+        </label>
+        <label class="field"><span>Anni di utilizzo</span><input id="years" type="number" min="1" max="15" value="5"></label>
+        <label class="field"><span>Quota ricarica a casa</span><div class="input-unit"><input id="homeShare" type="number" min="0" max="100" value="80"><i>%</i></div></label>
+      </div>
+    </section>
+
+    <section class="results" aria-labelledby="results-title">
+      <div class="section-head result-head">
+        <div><span class="step">02</span><h2 id="results-title">Confronto annuale</h2></div>
+        <p>Inclusi energia, manutenzione, bollo e assicurazione stimati</p>
+      </div>
+      <div id="cards" class="cards" aria-live="polite"></div>
+      <div class="chart-panel panel">
+        <div class="chart-head"><h3>Composizione del costo annuo</h3><span>€ / anno</span></div>
+        <div id="chart" class="chart"></div>
+      </div>
+    </section>
+
+    <details class="assumptions panel">
+      <summary><span><span class="step">03</span><b>Modifica prezzi e ipotesi</b></span><span class="summary-hint">Apri dettagli <i>＋</i></span></summary>
+      <div class="assumption-body">
+        <div class="price-grid">
+          <label class="field"><span>Benzina self</span><div class="input-unit"><input id="petrolPrice" type="number" min="0" step="0.001" value="2.108"><i>€/l</i></div></label>
+          <label class="field"><span>Diesel self</span><div class="input-unit"><input id="dieselPrice" type="number" min="0" step="0.001" value="2.227"><i>€/l</i></div></label>
+          <label class="field"><span>Corrente a casa</span><div class="input-unit"><input id="homePrice" type="number" min="0" step="0.01" value="0.28"><i>€/kWh</i></div></label>
+          <label class="field"><span>Ricarica pubblica</span><div class="input-unit"><input id="publicPrice" type="number" min="0" step="0.01" value="0.65"><i>€/kWh</i></div></label>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Alimentazione</th><th>Consumo medio</th><th>Manutenzione</th><th>Bollo + assicurazione</th></tr></thead>
+            <tbody id="assumptionRows"></tbody>
+          </table>
+        </div>
+        <div class="source-note">
+          <p><b>Dati aggiornati al 15 settembre 2026.</b> Carburanti: prezzi medi nazionali self del MIMIT. Corrente domestica: riferimento ARERA tutto incluso; ricarica pubblica: ipotesi media modificabile.</p>
+          <div><a href="https://www.mimit.gov.it/it/mercato-e-consumatori/prezzi/prezzi-medi-dei-carburanti" target="_blank" rel="noreferrer">Fonte carburanti ↗</a><a href="https://www.arera.it/comunicati-stampa/dettaglio/elettricita-maggior-tutela-27-i-trimestre-2026-clienti-vulnerabili-calo-principali-voci-bolletta" target="_blank" rel="noreferrer">Fonte elettricità ↗</a></div>
+        </div>
+      </div>
+    </details>
+  </main>
+
+  <footer><span>Stima orientativa, non un preventivo.</span><span>I costi reali dipendono da modello, guida, zona e contratto.</span></footer>
+  <script src="app.js" defer></script>
+</body>
+</html>
